@@ -1,10 +1,6 @@
 import React from 'react'
-import {Book} from '../common/types'
+import {BookGridProps} from '../common/types'
 import BookItem from './BookItem'
-
-interface BookGridProps {
-  books: Book[]
-}
 
 const BookGrid: React.SFC<BookGridProps> = ({books}) => (
   <ol className="books-grid">

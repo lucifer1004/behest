@@ -1,11 +1,6 @@
 import React from 'react'
-import {Book} from '../common/types'
+import {ShelfProps} from '../common/types'
 import BookGrid from './BookGrid'
-
-interface ShelfProps {
-  books: Book[]
-  title: string
-}
 
 const Shelf: React.SFC<ShelfProps> = ({books, title}) => (
   <div className="bookshelf">

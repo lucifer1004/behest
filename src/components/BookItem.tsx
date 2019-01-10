@@ -1,9 +1,5 @@
 import React from 'react'
-import {Book} from '../common/types'
-
-interface BookItemProps {
-  book: Book
-}
+import {BookItemProps} from '../common/types'
 
 const BookItem: React.SFC<BookItemProps> = ({book}) => (
   <div className="book">

@@ -1,3 +1,5 @@
+import {loadavg} from 'os'
+
 interface ImageLink {
   smallThumbnail: string
   thumbnail: string
@@ -40,5 +42,19 @@ export interface Book {
 
 export interface AppState {
   showSearchPage: boolean
+  isLoading: boolean
   books: Book[]
+}
+
+export interface BookItemProps {
+  book: Book
+}
+
+export interface BookGridProps {
+  books: Book[]
+}
+
+export interface ShelfProps {
+  books: Book[]
+  title: string
 }

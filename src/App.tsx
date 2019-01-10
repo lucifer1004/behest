@@ -9,15 +9,23 @@ class BooksApp extends React.PureComponent<{}, AppState> {
     super(props)
     this.state = {
       showSearchPage: false,
+      isLoading: false,
       books: [],
     }
   }
 
   componentWillMount() {
     getAll().then(books => {
-      this.setState({
-        books: books,
-      })
+      this.setState(
+        {
+          books: books,
+        },
+        () => {
+          this.setState({
+            isLoading: true,
+          })
+        },
+      )
     })
   }
 
@@ -48,7 +56,11 @@ class BooksApp extends React.PureComponent<{}, AppState> {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf books={this.state.books} title="New books" />
+                {this.state.isLoading ? (
+                  <Shelf books={this.state.books} title="New books" />
+                ) : (
+                  <Shelf books={[]} title="Loading new books..." />
+                )}
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
                   <div className="bookshelf-books">
