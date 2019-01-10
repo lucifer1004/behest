@@ -1,8 +1,6 @@
-const BASE_URI = 'https://reactnd-books-api.udacity.com'
+import {Book} from '../common/types'
 
-interface Book {
-  id: Number
-}
+const BASE_URI = 'https://reactnd-books-api.udacity.com'
 
 // Generate a unique token for storing your bookshelf data on the backend server.
 let token = localStorage.token
@@ -16,7 +14,7 @@ const headers = {
   Authorization: token,
 }
 
-export const get = (bookId: Number) =>
+export const get = (bookId: string) =>
   fetch(`${BASE_URI}/books/${bookId}`, {headers})
     .then(res => res.json())
     .then(data => data.book)
