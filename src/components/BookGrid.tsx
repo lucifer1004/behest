@@ -2,10 +2,10 @@ import React from 'react'
 import {BookGridProps} from '../common/types'
 import BookItem from './BookItem'
 
-const BookGrid: React.SFC<BookGridProps> = ({books}) => (
+const BookGrid: React.FunctionComponent<BookGridProps> = ({books}) => (
   <ol className="books-grid">
     {books.map(book => (
-      <li>
+      <li key={book.id}>
         <BookItem book={book} />
       </li>
     ))}

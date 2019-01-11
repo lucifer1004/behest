@@ -1,7 +1,7 @@
 import React from 'react'
 import {BookItemProps} from '../common/types'
 
-const BookItem: React.SFC<BookItemProps> = ({book}) => (
+const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => (
   <div className="book">
     <div className="book-top">
       <div
