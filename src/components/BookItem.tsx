@@ -5,7 +5,6 @@ import BooksDispatch from '../contexts/BooksDispatch'
 const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
   const dispatch = useContext(BooksDispatch)
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value)
     dispatch({type: 'BOOKS_UPDATE', book: {...book, status: e.target.value}})
   }
   return (
@@ -22,17 +21,19 @@ const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
           }}
         />
         <div className="book-shelf-changer">
-          <select onChange={handleSelect} defaultValue={'MOVE_TO'}>
-            <option value="MOVE_TO" disabled>
+          <select onChange={handleSelect}>
+            <option value="MOVE_TO" selected disabled>
               Move this book to...
             </option>
-            {book.status !== 'READING' ? (
-              <option value="READING">Currently Reading</option>
-            ) : null}
-            {book.status !== 'TO_READ' ? (
-              <option value="TO_READ">Want to Read</option>
-            ) : null}
-            {book.status !== 'READ' ? <option value="READ">Read</option> : null}
+            <option value="READING" disabled={book.status === 'READING'}>
+              Currently Reading
+            </option>
+            <option value="TO_READ" disabled={book.status === 'TO_READ'}>
+              Want to Read
+            </option>
+            <option value="READ" disabled={book.status === 'READ'}>
+              Read
+            </option>
           </select>
         </div>
       </div>

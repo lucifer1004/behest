@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useReducer} from 'react'
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom'
 import {AppState, Book} from './common/types'
-import {get, getAll, update, search} from './helpers/BooksAPI'
+import {getAll} from './helpers/BooksAPI'
 import BooksDispatch from './contexts/BooksDispatch'
 import booksReducer from './reducers/BooksReducer'
 import Shelf from './components/Shelf'
@@ -48,16 +48,13 @@ const BooksApp: React.FunctionComponent<{}> = () => {
   const [{books}, dispatch] = useReducer(booksReducer, {books: []})
 
   /**
-   * Fetch books from localStorage
+   * Fetch books from localStorage and BooksAPI.getAll()
    */
   useEffect(() => {
     const localBooks = localStorage.getItem('local-books')
     if (localBooks) {
       books.push(...JSON.parse(localBooks))
     }
-  }, [])
-
-  useEffect(() => {
     getAll().then(newBooks => {
       newBooks.forEach((book: Book) => {
         dispatch({type: 'BOOKS_UPDATE', book: {...book, status: 'NONE'}})
@@ -66,37 +63,19 @@ const BooksApp: React.FunctionComponent<{}> = () => {
     })
   }, [])
 
+  /**
+   * Update shelves and localStorage
+   */
   useEffect(
     () => {
       setNewBooks(books.filter(book => book.status === 'NONE') as any)
-    },
-    [books],
-  )
-
-  useEffect(
-    () => {
       setBooksToRead(books.filter(book => book.status === 'TO_READ') as any)
-    },
-    [books],
-  )
-
-  useEffect(
-    () => {
       setBooksRead(books.filter(book => book.status === 'READ') as any)
-    },
-    [books],
-  )
-
-  useEffect(
-    () => {
       setBooksReading(books.filter(book => book.status === 'READING') as any)
+      localStorage.setItem('local-books', JSON.stringify(books))
     },
     [books],
   )
-
-  useEffect(() => {
-    localStorage.setItem('local-books', JSON.stringify(books))
-  })
 
   return (
     <BrowserRouter>

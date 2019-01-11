@@ -22,14 +22,14 @@ const booksReducer = (state: BooksState, action: Actions) => {
     case 'BOOKS_RESET':
       return initialState
     case 'BOOKS_UPDATE':
-      if (action.book.status === 'NONE') return state
       const updatedBooks = state.books.slice()
       let originalBook =
         updatedBooks.find((book: Book) => book.id === action.book.id) || null
       if (!originalBook) {
         updatedBooks.push(action.book)
       } else {
-        originalBook = Object.assign(originalBook, action.book)
+        if (action.book.status !== 'NONE')
+          originalBook = Object.assign(originalBook, action.book)
       }
       return {books: updatedBooks}
     default:
