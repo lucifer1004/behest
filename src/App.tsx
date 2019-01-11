@@ -19,7 +19,7 @@ const Main: React.FunctionComponent<AppState> = ({
     </div>
     <div className="list-books-content">
       <div>
-        {isLoading ? (
+        {!isLoading ? (
           <Shelf books={newBooks} title="New books" />
         ) : (
           <Shelf books={[]} title="Loading new books..." />
@@ -38,14 +38,15 @@ const Main: React.FunctionComponent<AppState> = ({
 )
 
 const BooksApp: React.FunctionComponent<{}> = () => {
-  const [loadingStatus, setLoadingStatus] = useState(false)
+  const [loadingStatus, setLoadingStatus] = useState(true)
   const [newBooks, setNewBooks] = useState([])
   const [booksToRead, setBooksToRead] = useState([])
+
   useEffect(() => {
     getAll()
       .then(books => setNewBooks(books))
-      .then(() => setLoadingStatus(true))
-  })
+      .then(() => setLoadingStatus(false))
+  }, [])
 
   useEffect(() => {
     const localBooks = localStorage.getItem('local-books')
@@ -57,7 +58,7 @@ const BooksApp: React.FunctionComponent<{}> = () => {
     } else {
       setBooksToRead(JSON.parse(localBooks))
     }
-  })
+  }, [])
 
   return (
     <BrowserRouter>
