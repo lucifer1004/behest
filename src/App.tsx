@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useReducer} from 'react'
 import {BrowserRouter, Link, Route, Switch} from 'react-router-dom'
-import {AppState} from './common/types'
+import {AppState, Book} from './common/types'
 import {get, getAll, update, search} from './helpers/BooksAPI'
+import BooksDispatch from './contexts/BooksDispatch'
+import booksReducer from './reducers/BooksReducer'
 import Shelf from './components/Shelf'
 import SearchBox from './components/SearchBox'
 import './App.css'
@@ -41,44 +43,82 @@ const BooksApp: React.FunctionComponent<{}> = () => {
   const [loadingStatus, setLoadingStatus] = useState(true)
   const [newBooks, setNewBooks] = useState([])
   const [booksToRead, setBooksToRead] = useState([])
+  const [booksRead, setBooksRead] = useState([])
+  const [booksReading, setBooksReading] = useState([])
+  const [{books}, dispatch] = useReducer(booksReducer, {books: []})
 
-  useEffect(() => {
-    getAll()
-      .then(books => setNewBooks(books))
-      .then(() => setLoadingStatus(false))
-  }, [])
-
+  /**
+   * Fetch books from localStorage
+   */
   useEffect(() => {
     const localBooks = localStorage.getItem('local-books')
-    if (!localBooks) {
-      search('Android').then(books => {
-        setBooksToRead(books)
-        localStorage.setItem('local-books', JSON.stringify(books))
-      })
-    } else {
-      setBooksToRead(JSON.parse(localBooks))
+    if (localBooks) {
+      books.push(...JSON.parse(localBooks))
     }
   }, [])
 
+  useEffect(() => {
+    getAll().then(newBooks => {
+      newBooks.forEach((book: Book) => {
+        dispatch({type: 'BOOKS_UPDATE', book: {...book, status: 'NONE'}})
+      })
+      setLoadingStatus(false)
+    })
+  }, [])
+
+  useEffect(
+    () => {
+      setNewBooks(books.filter(book => book.status === 'NONE') as any)
+    },
+    [books],
+  )
+
+  useEffect(
+    () => {
+      setBooksToRead(books.filter(book => book.status === 'TO_READ') as any)
+    },
+    [books],
+  )
+
+  useEffect(
+    () => {
+      setBooksRead(books.filter(book => book.status === 'READ') as any)
+    },
+    [books],
+  )
+
+  useEffect(
+    () => {
+      setBooksReading(books.filter(book => book.status === 'READING') as any)
+    },
+    [books],
+  )
+
+  useEffect(() => {
+    localStorage.setItem('local-books', JSON.stringify(books))
+  })
+
   return (
     <BrowserRouter>
-      <div className="app">
-        <Switch>
-          <Route path="/search" component={SearchBox} />
-          <Route
-            path="/"
-            render={() => (
-              <Main
-                isLoading={loadingStatus}
-                newBooks={newBooks}
-                booksToRead={booksToRead}
-                booksRead={[]}
-                booksReading={[]}
-              />
-            )}
-          />
-        </Switch>
-      </div>
+      <BooksDispatch.Provider value={dispatch}>
+        <div className="app">
+          <Switch>
+            <Route path="/search" component={SearchBox} />
+            <Route
+              path="/"
+              render={() => (
+                <Main
+                  isLoading={loadingStatus}
+                  newBooks={newBooks}
+                  booksToRead={booksToRead}
+                  booksRead={booksRead}
+                  booksReading={booksReading}
+                />
+              )}
+            />
+          </Switch>
+        </div>
+      </BooksDispatch.Provider>
     </BrowserRouter>
   )
 }

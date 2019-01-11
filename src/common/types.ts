@@ -1,9 +1,4 @@
-enum BookStatus {
-  NULL,
-  TO_READ,
-  READING,
-  READ,
-}
+type BookStatus = 'NONE' | 'TO_READ' | 'READING' | 'READ'
 
 interface ImageLink {
   smallThumbnail: string
