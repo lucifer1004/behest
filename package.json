@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write src/**/*.ts src/**/*.tsx src/**/*.css **/*.md **/*.json"
+    "format": "prettier --write src/**/*.ts src/**/*.tsx src/**/*.css **/*.md **/*.json",
+    "now-build": "react-scripts build && mv build dist"
   },
   "eslintConfig": {
     "extends": "react-app",
