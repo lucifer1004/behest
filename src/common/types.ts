@@ -1,4 +1,9 @@
-import {loadavg} from 'os'
+enum BookStatus {
+  NULL,
+  TO_READ,
+  READING,
+  READ,
+}
 
 interface ImageLink {
   smallThumbnail: string
@@ -36,14 +41,17 @@ export interface Book {
   publisher?: string
   ratingsCount?: number
   readingModes?: ReadingModes
+  status?: BookStatus
   subtitle?: string
   title?: string
 }
 
 export interface AppState {
-  showSearchPage: boolean
   isLoading: boolean
-  books: Book[]
+  newBooks: Book[]
+  booksToRead: Book[]
+  booksRead: Book[]
+  booksReading: Book[]
 }
 
 export interface BookItemProps {

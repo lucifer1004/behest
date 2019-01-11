@@ -28,7 +28,7 @@ const BookItem: React.SFC<BookItemProps> = ({book}) => (
     </div>
     <div className="book-title">{book.title || null}</div>
     <div className="book-authors">
-      {book.authors ? book.authors.join('') : null}
+      {book.authors ? book.authors.join(', ') : null}
     </div>
   </div>
 )
