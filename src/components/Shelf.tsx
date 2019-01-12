@@ -3,12 +3,7 @@ import {ShelfProps} from '../common/types'
 import BookGrid from './BookGrid'
 import BooksDispatch from '../contexts/BooksDispatch'
 
-const Shelf: React.FunctionComponent<ShelfProps> = ({
-  books,
-  title,
-  type,
-  draggable = true,
-}) => {
+const Shelf: React.FunctionComponent<ShelfProps> = ({books, title, type}) => {
   const dispatch = useContext(BooksDispatch)
 
   const handleDragOver = (e: React.DragEvent<HTMLElement>) => {
@@ -26,10 +21,7 @@ const Shelf: React.FunctionComponent<ShelfProps> = ({
         {title} ({books.filter(book => book.shelf === type).length})
       </h2>
       <div className="bookshelf-books">
-        <BookGrid
-          books={books.filter(book => book.shelf === type)}
-          draggable={draggable}
-        />
+        <BookGrid books={books.filter(book => book.shelf === type)} />
       </div>
     </div>
   )

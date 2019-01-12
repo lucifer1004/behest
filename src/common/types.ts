@@ -48,17 +48,14 @@ export interface AppState {
 
 export interface BookItemProps {
   book: Book
-  draggable?: boolean
 }
 
 export interface BookGridProps {
   books: Book[]
-  draggable?: boolean
 }
 
 export interface ShelfProps {
   books: Book[]
   title: string
   type: ShelfType
-  draggable?: boolean
 }

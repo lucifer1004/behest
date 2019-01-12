@@ -3,10 +3,7 @@ import {Link} from 'react-router-dom'
 import {BookItemProps} from '../common/types'
 import BookSelect from './BookSelect'
 
-const BookItem: React.FunctionComponent<BookItemProps> = ({
-  book,
-  draggable = true,
-}) => {
+const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     e.dataTransfer.setData('id', book.id)
   }
@@ -16,7 +13,7 @@ const BookItem: React.FunctionComponent<BookItemProps> = ({
       <div className="book-top">
         <div
           className="book-cover"
-          draggable={draggable}
+          draggable={location.pathname === '/'}
           onDragStart={handleDragStart}
           style={{
             width: 128,

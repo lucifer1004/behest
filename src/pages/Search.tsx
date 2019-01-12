@@ -50,13 +50,7 @@ const Search: React.FunctionComponent = ({}) => {
         </div>
       </div>
       <div className="search-books-results">
-        {input === '' ? (
-          ''
-        ) : found ? (
-          <BookGrid books={books} draggable={false} />
-        ) : (
-          'No results'
-        )}
+        {input === '' ? '' : found ? <BookGrid books={books} /> : 'No results'}
       </div>
     </div>
   )
