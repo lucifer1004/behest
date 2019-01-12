@@ -1,9 +1,5 @@
 # CHANGELOG
 
-## TODO
-
-- [ ] Beautify book info page
-
 ## [0.2.0] - <2019-01-12>
 
 ### ADDED
