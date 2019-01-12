@@ -1,30 +1,12 @@
 import React, {useEffect, useState, useReducer} from 'react'
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom'
-import {AppState, Book} from './common/types'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Book} from './common/types'
 import {getAll} from './helpers/BooksAPI'
 import BooksDispatch from './contexts/BooksDispatch'
 import booksReducer from './reducers/BooksReducer'
-import Shelf from './components/Shelf'
-import SearchBox from './components/SearchBox'
+import Main from './pages/Main'
+import Search from './pages/Search'
 import './App.css'
-
-const Main: React.FunctionComponent<AppState> = ({isLoading, books}) => (
-  <div className="list-books">
-    <div className="list-books-title">
-      <h1>MyReads</h1>
-    </div>
-    <div className="list-books-content">
-      <Shelf books={books} title="Want to read" type="wantToRead" />
-      <Shelf books={books} title="Current reading" type="currentlyReading" />
-      <Shelf books={books} title="Read" type="read" />
-    </div>
-    <div className="open-search">
-      <Link to="/search">
-        <button>Add a book</button>
-      </Link>
-    </div>
-  </div>
-)
 
 const BooksApp: React.FunctionComponent<{}> = () => {
   const [loadingStatus, setLoadingStatus] = useState(true)
@@ -61,7 +43,7 @@ const BooksApp: React.FunctionComponent<{}> = () => {
       <BooksDispatch.Provider value={dispatch}>
         <div className="app">
           <Switch>
-            <Route path="/search" component={SearchBox} />
+            <Route path="/search" component={Search} />
             <Route
               path="/"
               render={() => <Main isLoading={loadingStatus} books={books} />}

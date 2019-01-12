@@ -3,14 +3,19 @@
 Using this app, you can search for books you like and then add them to your
 shelves.
 
+This app is auto-deployed at https://behest.gabriel-wu.com via
+[now](https://zeit.co/now).
+
 ## Highlights
 
 - This project was bootstrapped with
   [Create React App](https://github.com/facebook/create-react-app).
 - Use TypeScript.
 - Use React Hooks to manage states.
-- Use functional components instead of class components.
+- Use functional components instead of class components. There is no `this` in
+  the whole project.
 - Use service workers.
+- Enable drag and drop.
 
 ## To run it locally
 

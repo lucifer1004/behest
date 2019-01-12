@@ -1,13 +1,15 @@
 import React, {useState, ChangeEvent, useEffect} from 'react'
 import {Link} from 'react-router-dom'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import {search} from '../helpers/BooksAPI'
 import {useDebounce} from '../helpers/CustomHooks'
-import BookGrid from './BookGrid'
+import BookGrid from '../components/BookGrid'
 
-const SearchBox: React.FunctionComponent = ({}) => {
+const Search: React.FunctionComponent = ({}) => {
   const [input, updateInput] = useState('')
   const [books, updateBooks] = useState([])
   const [found, setFound] = useState(false)
+  const [loadingStatus, setLoadingStatus] = useState(false)
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     updateInput(e.target.value)
   }
@@ -17,7 +19,9 @@ const SearchBox: React.FunctionComponent = ({}) => {
   useEffect(
     () => {
       if (debouncedInput === '') return
+      setLoadingStatus(true)
       search(debouncedInput).then(books => {
+        setLoadingStatus(false)
         if (!books) return
         if (books.hasOwnProperty('error')) {
           setFound(false)
@@ -42,6 +46,7 @@ const SearchBox: React.FunctionComponent = ({}) => {
             placeholder="Search by title or author"
             onChange={handleInput}
           />
+          <div>{loadingStatus ? <LinearProgress /> : null}</div>
         </div>
       </div>
       <div className="search-books-results">
@@ -56,4 +61,4 @@ const SearchBox: React.FunctionComponent = ({}) => {
     </div>
   )
 }
-export default SearchBox
+export default Search
