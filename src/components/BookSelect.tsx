@@ -1,27 +1,22 @@
 import React, {useContext} from 'react'
-import {BookItemProps} from '../common/types'
+import {BookItemProps, ShelfType} from '../common/types'
 import BooksDispatch from '../contexts/BooksDispatch'
 
 const BookSelect: React.FunctionComponent<BookItemProps> = ({book}) => {
   const dispatch = useContext(BooksDispatch)
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch({type: 'BOOKS_UPDATE', book: {...book, status: e.target.value}})
+    dispatch({type: 'BOOKS_UPDATE', book: {...book, shelf: e.target.value}})
+    book.shelf = e.target.value as ShelfType
   }
   return (
     <div className="book-shelf-changer">
-      <select value={book.status} onChange={handleSelect}>
-        <option value="NONE" disabled>
+      <select value={book.shelf || 'default'} onChange={handleSelect}>
+        <option value="default" disabled>
           Move this book to...
         </option>
-        <option value="READING" disabled={book.status === 'READING'}>
-          Currently Reading
-        </option>
-        <option value="TO_READ" disabled={book.status === 'TO_READ'}>
-          Want to Read
-        </option>
-        <option value="READ" disabled={book.status === 'READ'}>
-          Read
-        </option>
+        <option value="currentlyReading">Currently Reading</option>
+        <option value="wantToRead">Want to Read</option>
+        <option value="read">Read</option>
       </select>
     </div>
   )

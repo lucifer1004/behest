@@ -14,16 +14,9 @@ const Main: React.FunctionComponent<AppState> = ({isLoading, books}) => (
       <h1>MyReads</h1>
     </div>
     <div className="list-books-content">
-      <div>
-        {!isLoading ? (
-          <Shelf books={books} title="New books" type="NONE" />
-        ) : (
-          <Shelf books={[]} title="Loading new books..." type="NONE" />
-        )}
-      </div>
-      <Shelf books={books} title="Want to read" type="TO_READ" />
-      <Shelf books={books} title="Current reading" type="READING" />
-      <Shelf books={books} title="Read" type="READ" />
+      <Shelf books={books} title="Want to read" type="wantToRead" />
+      <Shelf books={books} title="Current reading" type="currentlyReading" />
+      <Shelf books={books} title="Read" type="read" />
     </div>
     <div className="open-search">
       <Link to="/search">
@@ -47,7 +40,7 @@ const BooksApp: React.FunctionComponent<{}> = () => {
     }
     getAll().then(newBooks => {
       newBooks.forEach((book: Book) => {
-        dispatch({type: 'BOOKS_UPDATE', book: {...book, status: 'NONE'}})
+        dispatch({type: 'BOOKS_UPDATE', book: book})
       })
       setLoadingStatus(false)
     })

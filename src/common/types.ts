@@ -1,6 +1,6 @@
-type BookStatus = 'NONE' | 'TO_READ' | 'READING' | 'READ'
+export type BookStatus = 'NONE' | 'TO_READ' | 'READING' | 'READ'
 
-type Shelf = 'wantToRead' | 'currentlyReading' | 'read'
+export type ShelfType = 'wantToRead' | 'currentlyReading' | 'read'
 
 interface ImageLink {
   smallThumbnail: string
@@ -38,7 +38,7 @@ export interface Book {
   publisher?: string
   ratingsCount?: number
   readingModes?: ReadingModes
-  shelf?: Shelf
+  shelf?: ShelfType
   status?: BookStatus
   subtitle?: string
   title?: string
@@ -60,5 +60,5 @@ export interface BookGridProps {
 export interface ShelfProps {
   books: Book[]
   title: string
-  type: BookStatus
+  type: ShelfType
 }

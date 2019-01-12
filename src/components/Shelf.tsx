@@ -6,7 +6,7 @@ const Shelf: React.FunctionComponent<ShelfProps> = ({books, title, type}) => (
   <div className="bookshelf">
     <h2 className="bookshelf-title">{title}</h2>
     <div className="bookshelf-books">
-      <BookGrid books={books.filter(book => book.status === type)} />
+      <BookGrid books={books.filter(book => book.shelf === type)} />
     </div>
   </div>
 )

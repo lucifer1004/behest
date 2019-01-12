@@ -1,4 +1,4 @@
-import {Book} from '../common/types'
+import {Book, ShelfType} from '../common/types'
 
 const BASE_URI = 'https://reactnd-books-api.udacity.com'
 
@@ -24,7 +24,7 @@ export const getAll = () =>
     .then(res => res.json())
     .then(data => data.books)
 
-export const update = (book: Book, shelf: string) =>
+export const update = (book: Book, shelf: ShelfType) =>
   fetch(`${BASE_URI}/books/${book.id}`, {
     method: 'PUT',
     headers: {

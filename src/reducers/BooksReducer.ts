@@ -1,4 +1,4 @@
-import {Book} from '../common/types'
+import {Book, ShelfType} from '../common/types'
 import {update} from '../helpers/BooksAPI'
 
 interface BooksState {
@@ -28,9 +28,10 @@ const booksReducer = (state: BooksState, action: Actions) => {
       if (!originalBook) {
         updatedBooks.push(action.book)
       } else {
-        if (action.book.status !== 'NONE')
-          originalBook = Object.assign(originalBook, action.book)
+        originalBook = Object.assign(originalBook, action.book)
       }
+      update(action.book, action.book.shelf as ShelfType)
+      console.log(updatedBooks)
       return {books: updatedBooks}
     default:
       return state
