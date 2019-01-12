@@ -1,12 +1,14 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Redirect} from 'react-router-dom'
 import {Book} from '../common/types'
 import {get} from '../helpers/BooksAPI'
+import BooksDispatch from '../contexts/BooksDispatch'
 import BookCard from '../components/BookCard'
 
 const BookInfo = ({match}: {match: any}) => {
   const [book, setBook] = useState(null)
   const [loading, setLoading] = useState(true)
+  const dispatch = useContext(BooksDispatch)
   const getLocal = () => {
     let localBooks = localStorage.getItem('local-books')
     if (!localBooks) return false
@@ -31,6 +33,7 @@ const BookInfo = ({match}: {match: any}) => {
       get(match.params.id).then(remoteBook => {
         setBook(remoteBook)
         setLoading(false)
+        dispatch({type: 'BOOKS_UPDATE', book: remoteBook})
       })
     }
   }, [])
