@@ -3,6 +3,9 @@
 ## TODO
 
 - [ ] Edit book category via drag and drop
+- [ ] Show book details when clicking on its cover image
+
+## [0.2.0]
 
 ## [0.1.0] - <2019-01-11>
 

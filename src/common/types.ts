@@ -1,5 +1,7 @@
 type BookStatus = 'NONE' | 'TO_READ' | 'READING' | 'READ'
 
+type Shelf = 'wantToRead' | 'currentlyReading' | 'read'
+
 interface ImageLink {
   smallThumbnail: string
   thumbnail: string
@@ -36,6 +38,7 @@ export interface Book {
   publisher?: string
   ratingsCount?: number
   readingModes?: ReadingModes
+  shelf?: Shelf
   status?: BookStatus
   subtitle?: string
   title?: string
@@ -43,10 +46,7 @@ export interface Book {
 
 export interface AppState {
   isLoading: boolean
-  newBooks: Book[]
-  booksToRead: Book[]
-  booksRead: Book[]
-  booksReading: Book[]
+  books: Book[]
 }
 
 export interface BookItemProps {
@@ -60,4 +60,5 @@ export interface BookGridProps {
 export interface ShelfProps {
   books: Book[]
   title: string
+  type: BookStatus
 }

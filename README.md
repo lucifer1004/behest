@@ -1,5 +1,8 @@
 # Behest
 
+Using this app, you can search for books you like and then add them to your
+shelves.
+
 ## Highlights
 
 - This project was bootstrapped with
@@ -9,11 +12,22 @@
 - Use functional components instead of class components.
 - Use service workers.
 
-## Available Scripts
+## To run it locally
+
+First, you will need to clone the project, and change directory to the project's
+root directory.
+
+```sh
+git clone https://github.com/lucifer1004/behest
+cd behest
+```
 
 In the project directory, you can run:
 
-### `yarn start`
+```sh
+yarn # To install all dependencies
+yarn start # To start a development server
+```
 
 Runs the app in the development mode.<br> Open
 [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -21,52 +35,35 @@ Runs the app in the development mode.<br> Open
 The page will reload if you make edits.<br> You will also see any lint errors in
 the console.
 
-### `yarn test`
+You can also build it manually and run it in production mode, so that PWA will
+be enabled, which means the application can run offline.
 
-Launches the test runner in the interactive watch mode.<br> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+```sh
+yarn global add http-server # If you have not installed it.
+yarn build
+cd build
+http-server
+```
 
-### `yarn build`
+## To run tests
 
-Builds the app for production to the `build` folder.<br> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+```sh
+yarn test
+```
 
-The build is minified and the filenames include the hashes.<br> Your app is
-ready to be deployed!
+From the interactive options, you can choose `a` to run all tests, or `q` to
+quit. Other options can be seen when you run it.
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+## To deploy
 
-### `yarn format`
+First you will need to register an account at [now](https://zeit.co/now) and
+configure it on [GitHub](https://github.com).
 
-Trigger `prettier` manually (this will be applied to all source files, instead
-of staged files).
+Then you should make changes to the `name` and `alias` properties in `now.json`
+as you want.
 
-### `yarn eject`
+The deployment will be as simple as:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
-
-Instead, it will copy all the configuration files and the transitive
-dependencies (Webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+now
+```

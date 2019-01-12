@@ -8,13 +8,7 @@ import Shelf from './components/Shelf'
 import SearchBox from './components/SearchBox'
 import './App.css'
 
-const Main: React.FunctionComponent<AppState> = ({
-  isLoading,
-  newBooks,
-  booksToRead,
-  booksReading,
-  booksRead,
-}) => (
+const Main: React.FunctionComponent<AppState> = ({isLoading, books}) => (
   <div className="list-books">
     <div className="list-books-title">
       <h1>MyReads</h1>
@@ -22,14 +16,14 @@ const Main: React.FunctionComponent<AppState> = ({
     <div className="list-books-content">
       <div>
         {!isLoading ? (
-          <Shelf books={newBooks} title="New books" />
+          <Shelf books={books} title="New books" type="NONE" />
         ) : (
-          <Shelf books={[]} title="Loading new books..." />
+          <Shelf books={[]} title="Loading new books..." type="NONE" />
         )}
       </div>
-      <Shelf books={booksToRead} title="Want to read" />
-      <Shelf books={booksReading} title="Current reading" />
-      <Shelf books={booksRead} title="Read" />
+      <Shelf books={books} title="Want to read" type="TO_READ" />
+      <Shelf books={books} title="Current reading" type="READING" />
+      <Shelf books={books} title="Read" type="READ" />
     </div>
     <div className="open-search">
       <Link to="/search">
@@ -41,10 +35,6 @@ const Main: React.FunctionComponent<AppState> = ({
 
 const BooksApp: React.FunctionComponent<{}> = () => {
   const [loadingStatus, setLoadingStatus] = useState(true)
-  const [newBooks, setNewBooks] = useState([])
-  const [booksToRead, setBooksToRead] = useState([])
-  const [booksRead, setBooksRead] = useState([])
-  const [booksReading, setBooksReading] = useState([])
   const [{books}, dispatch] = useReducer(booksReducer, {books: []})
 
   /**
@@ -68,10 +58,6 @@ const BooksApp: React.FunctionComponent<{}> = () => {
    */
   useEffect(
     () => {
-      setNewBooks(books.filter(book => book.status === 'NONE') as any)
-      setBooksToRead(books.filter(book => book.status === 'TO_READ') as any)
-      setBooksRead(books.filter(book => book.status === 'READ') as any)
-      setBooksReading(books.filter(book => book.status === 'READING') as any)
       localStorage.setItem('local-books', JSON.stringify(books))
     },
     [books],
@@ -85,15 +71,7 @@ const BooksApp: React.FunctionComponent<{}> = () => {
             <Route path="/search" component={SearchBox} />
             <Route
               path="/"
-              render={() => (
-                <Main
-                  isLoading={loadingStatus}
-                  newBooks={newBooks}
-                  booksToRead={booksToRead}
-                  booksRead={booksRead}
-                  booksReading={booksReading}
-                />
-              )}
+              render={() => <Main isLoading={loadingStatus} books={books} />}
             />
           </Switch>
         </div>
