@@ -1,14 +1,21 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
+import {Link} from 'react-router-dom'
 import {makeStyles} from '@material-ui/styles'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
+import Dialog from '@material-ui/core/Dialog'
+import Fab from '@material-ui/core/Fab'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
 import Typography from '@material-ui/core/Typography'
-import {Book} from '../common/types'
+import {Book, ShelfType} from '../common/types'
 import {shelfTypeToShelf} from '../helpers/BooksHelper'
+import BooksDispatch from '../contexts/BooksDispatch'
+import BackIcon from './BackIcon'
+import HomeIcon from './HomeIcon'
 
 const useStyles = makeStyles({
   card: {
@@ -42,7 +49,41 @@ const useStyles = makeStyles({
 })
 
 const BookCard = ({book}: {book: Book}) => {
+  const [dialogOpen, setDialog] = useState(false)
+  const [shareSuccess, setShareStatus] = useState(false)
   const classes = useStyles()
+  const dispatch = useContext(BooksDispatch)
+
+  /**
+   * Handle clicking `Mark as` button
+   */
+  const handleMark = () => {
+    setDialog(true)
+  }
+
+  /**
+   * Handle choosing new bookshelf
+   */
+  const handleClose = (shelfType: ShelfType) => {
+    setDialog(false)
+    dispatch({type: 'BOOKS_UPDATE', book: {id: book.id, shelf: shelfType}})
+    book.shelf = shelfType
+  }
+
+  /**
+   * Handle sharing
+   */
+  const handleShare = () => {
+    let clonedNavigator: any = window.navigator
+    if (clonedNavigator && clonedNavigator.clipboard) {
+      clonedNavigator.clipboard.writeText(location.href).then(() => {
+        setShareStatus(true)
+      })
+    } else {
+      return false
+    }
+  }
+
   return (
     <div
       style={{
@@ -52,6 +93,32 @@ const BookCard = ({book}: {book: Book}) => {
       }}
     >
       <Card className={classes.card}>
+        <div
+          style={{
+            alignSelf: 'flex-start',
+            display: 'flex',
+            padding: 5,
+          }}
+        >
+          <div style={{padding: 5}}>
+            <Link to="/">
+              <Fab color="primary" aria-label="Home">
+                <HomeIcon />
+              </Fab>
+            </Link>
+          </div>
+          <div style={{padding: 5}}>
+            <Fab
+              color="primary"
+              aria-label="Back"
+              onClick={() => {
+                window.history.back()
+              }}
+            >
+              <BackIcon />
+            </Fab>
+          </div>
+        </div>
         <CardContent
           style={{
             fontSize: 10,
@@ -73,17 +140,59 @@ const BookCard = ({book}: {book: Book}) => {
             <Typography variant="h6">
               {book.authors && book.authors.length > 1 ? 'Authors' : 'Author'}:{' '}
               {book.authors ? book.authors.join(', ') : null}
+              <hr />
+              Rating:{' '}
+              {book.averageRating
+                ? '❤️'.repeat(Math.round(book.averageRating))
+                : 'Unknown'}
+              <hr />
+              Pages: {book.pageCount || 'Unknown'}
+              <hr />
+              Categories:{' '}
+              {book.categories ? book.categories.join(', ') : 'Unknown'}
             </Typography>
             <CardActions className={classes.buttons}>
               <Button size="small" color="primary" disabled>
                 {shelfTypeToShelf(book.shelf || null)}
               </Button>
-              <Button size="small" color="primary" variant="outlined">
+              <Button
+                size="small"
+                color="primary"
+                variant="outlined"
+                onClick={handleShare}
+              >
                 Share
               </Button>
-              <Button size="small" color="primary" variant="contained">
+              <Dialog open={shareSuccess} onClick={() => setShareStatus(false)}>
+                <Typography variant="h6">
+                  Share link has been copied to your clipboard
+                </Typography>
+              </Dialog>
+              <Button
+                size="small"
+                color="primary"
+                variant="contained"
+                onClick={handleMark}
+              >
                 Mark as
               </Button>
+              <Dialog aria-labelledby="simple-dialog-title" open={dialogOpen}>
+                <List>
+                  <Typography variant="h6">Mark this book as...</Typography>
+                  <ListItem button onClick={() => handleClose('wantToRead')}>
+                    <Typography variant="body1">Want to read</Typography>
+                  </ListItem>
+                  <ListItem
+                    button
+                    onClick={() => handleClose('currentlyReading')}
+                  >
+                    <Typography variant="body1">Currently reading</Typography>
+                  </ListItem>
+                  <ListItem button onClick={() => handleClose('read')}>
+                    <Typography variant="body1">Read</Typography>
+                  </ListItem>
+                </List>
+              </Dialog>
             </CardActions>
           </CardContent>
         </CardContent>

@@ -1,16 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Link, Redirect} from 'react-router-dom'
-import Fab from '@material-ui/core/Fab'
-import SvgIcon from '@material-ui/core/SvgIcon'
+import {Redirect} from 'react-router-dom'
 import {Book} from '../common/types'
 import {get} from '../helpers/BooksAPI'
 import BookCard from '../components/BookCard'
-
-const HomeIcon = (props: any) => (
-  <SvgIcon {...props}>
-    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-  </SvgIcon>
-)
 
 const BookInfo = ({match}: {match: any}) => {
   const [book, setBook] = useState(null)
@@ -33,10 +25,9 @@ const BookInfo = ({match}: {match: any}) => {
       setBook(localBook)
       setLoading(false)
     } else {
-
-    /**
-     * If not found, then fetch it from BooksAPI
-     */
+      /**
+       * If not found, then fetch it from BooksAPI
+       */
       get(match.params.id).then(remoteBook => {
         setBook(remoteBook)
         setLoading(false)
@@ -54,14 +45,7 @@ const BookInfo = ({match}: {match: any}) => {
       ) : !book ? (
         <Redirect to="/404" />
       ) : (
-        <div>
-          <Link to="/">
-            <Fab color="primary" aria-label="Home">
-              <HomeIcon />
-            </Fab>
-          </Link>
-          <BookCard book={book} />
-        </div>
+        <BookCard book={book} />
       )}
     </div>
   )
