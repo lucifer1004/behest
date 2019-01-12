@@ -7,6 +7,7 @@ import booksReducer from './reducers/BooksReducer'
 import Main from './pages/Main'
 import Search from './pages/Search'
 import BookInfo from './pages/BookInfo'
+import Error from './pages/Error'
 import './App.css'
 
 const BooksApp: React.FunctionComponent<{}> = () => {
@@ -50,6 +51,7 @@ const BooksApp: React.FunctionComponent<{}> = () => {
             render={() => <Main isLoading={loadingStatus} books={books} />}
           />
           <Route exact path="/book/:id" component={BookInfo} />
+          <Route exact path="/404" component={Error} />
         </div>
       </BooksDispatch.Provider>
     </BrowserRouter>
