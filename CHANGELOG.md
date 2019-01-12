@@ -2,14 +2,16 @@
 
 ## TODO
 
-- [ ] Show book details when clicking on its cover image
+- [ ] Beautify book info page
 
-## [0.2.0]
+## [0.2.0] - <2019-01-12>
 
 ### ADDED
 
 - Edit book category via drag and drop
 - Show progress while loading or searching
+- Show book info when clicking on its title
+- Add 404 page
 
 ### CHANGED
 
