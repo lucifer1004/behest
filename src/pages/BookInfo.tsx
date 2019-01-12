@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import Fab from '@material-ui/core/Fab'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import {Book} from '../common/types'
+import {get} from '../helpers/BooksAPI'
 import BookCard from '../components/BookCard'
 
 const HomeIcon = (props: any) => (
@@ -12,24 +13,56 @@ const HomeIcon = (props: any) => (
 )
 
 const BookInfo = ({match}: {match: any}) => {
-  let localBooks = localStorage.getItem('local-books')
-  if (!localBooks) return <Redirect to="/404" />
-  const book = JSON.parse(localBooks).find(
-    (localBook: Book) => localBook.id === match.params.id,
-  )
-  if (!book) return <Redirect to="/404" />
+  const [book, setBook] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const getLocal = () => {
+    let localBooks = localStorage.getItem('local-books')
+    if (!localBooks) return false
+    const localBook = JSON.parse(localBooks).find(
+      (book: Book) => book.id === match.params.id,
+    )
+    if (!localBook) return false
+    else return localBook
+  }
+  useEffect(() => {
+    /**
+     * First fetch the book from localStorage
+     */
+    const localBook = getLocal()
+    if (localBook) {
+      setBook(localBook)
+      setLoading(false)
+    } else {
+
+    /**
+     * If not found, then fetch it from BooksAPI
+     */
+      get(match.params.id).then(remoteBook => {
+        setBook(remoteBook)
+        setLoading(false)
+      })
+    }
+  }, [])
   return (
     <div
       style={{
         margin: 10,
       }}
     >
-      <Link to="/">
-        <Fab color="primary" aria-label="Home">
-          <HomeIcon />
-        </Fab>
-      </Link>
-      <BookCard book={book} />
+      {loading ? (
+        'Loading...'
+      ) : !book ? (
+        <Redirect to="/404" />
+      ) : (
+        <div>
+          <Link to="/">
+            <Fab color="primary" aria-label="Home">
+              <HomeIcon />
+            </Fab>
+          </Link>
+          <BookCard book={book} />
+        </div>
+      )}
     </div>
   )
 }

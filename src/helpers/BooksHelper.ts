@@ -9,6 +9,6 @@ export const shelfTypeToShelf = (shelfType: ShelfType | null): string => {
     case 'wantToRead':
       return 'To read'
     default:
-      return 'Not added yet'
+      return 'New'
   }
 }
