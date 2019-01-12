@@ -3,16 +3,24 @@ import {BookItemProps} from '../common/types'
 import BookSelect from './BookSelect'
 
 const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
+  const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
+    e.dataTransfer.setData('id', book.id)
+  }
+
   return (
     <div className="book">
       <div className="book-top">
         <div
           className="book-cover"
+          draggable
+          onDragStart={handleDragStart}
           style={{
             width: 128,
             height: 193,
             backgroundImage: `url('${
-              book.imageLinks ? book.imageLinks.thumbnail : ''
+              book.imageLinks
+                ? book.imageLinks.thumbnail
+                : 'https://images.unsplash.com/photo-1469827160215-9d29e96e72f4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80'
             }')`,
           }}
         />

@@ -1,5 +1,3 @@
-export type BookStatus = 'NONE' | 'TO_READ' | 'READING' | 'READ'
-
 export type ShelfType = 'wantToRead' | 'currentlyReading' | 'read'
 
 interface ImageLink {
@@ -39,7 +37,6 @@ export interface Book {
   ratingsCount?: number
   readingModes?: ReadingModes
   shelf?: ShelfType
-  status?: BookStatus
   subtitle?: string
   title?: string
 }

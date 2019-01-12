@@ -31,7 +31,6 @@ const booksReducer = (state: BooksState, action: Actions) => {
         originalBook = Object.assign(originalBook, action.book)
       }
       update(action.book, action.book.shelf as ShelfType)
-      console.log(updatedBooks)
       return {books: updatedBooks}
     default:
       return state

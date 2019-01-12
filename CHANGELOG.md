@@ -7,6 +7,10 @@
 
 ## [0.2.0]
 
+### CHANGED
+
+- Local modifications will be synced.
+
 ## [0.1.0] - <2019-01-11>
 
 ### ADDED
