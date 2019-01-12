@@ -896,7 +896,7 @@
     log-update "^2.3.0"
     strip-ansi "^3.0.1"
 
-"@material-ui/core@^3.8.3":
+"@material-ui/core@3.8.3":
   version "3.8.3"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.8.3.tgz#5173ceb114e781b01d239a02d851ff6ffbdbc0b0"
   integrity sha512-jgWx5uwpo+mCj+Y6JdygFRji8ZHDYZdbylqCXvpK42c2n6m/jsr4Y5Y7RnlgllkIqftKFGNnik/rd1gTLaF+Ig==
@@ -930,7 +930,7 @@
     recompose "0.28.0 - 0.30.0"
     warning "^4.0.1"
 
-"@material-ui/icons@^3.0.2":
+"@material-ui/icons@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-3.0.2.tgz#d67a6dd1ec8312d3a88ec97944a63daeef24fe10"
   integrity sha512-QY/3gJnObZQ3O/e6WjH+0ah2M3MOgLOzCy8HTUoUx9B6dDrS18vP7Ycw3qrDEKlB6q1KNxy6CZHm5FCauWGy2g==
@@ -938,7 +938,7 @@
     "@babel/runtime" "^7.2.0"
     recompose "0.28.0 - 0.30.0"
 
-"@material-ui/styles@^3.0.0-alpha.7":
+"@material-ui/styles@3.0.0-alpha.7":
   version "3.0.0-alpha.7"
   resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-3.0.0-alpha.7.tgz#e89bdea889b85f2dc3550e21038d80d5c5268124"
   integrity sha512-dP44B/xp2YjH8WPYhfAZwEjUTzTvsDER/3vNG/CMZeJynng2JrtCT0WSJXHK3UoQXam+xqwcCE7b4m1hHnCglQ==
@@ -1063,7 +1063,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^4.3.1":
+"@types/react-router-dom@4.3.1":
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-4.3.1.tgz#71fe2918f8f60474a891520def40a63997dafe04"
   integrity sha512-GbztJAScOmQ/7RsQfO4cd55RuH1W4g6V1gDW3j4riLlt+8yxYLqqsiMzmyuXBLzdFmDtX/uU2Bpcm0cmudv44A==
@@ -1080,7 +1080,7 @@
     "@types/history" "*"
     "@types/react" "*"
 
-"@types/react-test-renderer@^16.0.3":
+"@types/react-test-renderer@16.0.3":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.0.3.tgz#cce5c983d66cc5c3582e7c2f44b274ab635a8acc"
   integrity sha512-NWOAxVQeJxpXuNKgw83Hah0nquiw1nUexM9qY/Hk3a+XhZwgMtaa6GLA9E1TKMT75Odb3/KE/jiBO4enTuEJjQ==
@@ -3625,7 +3625,7 @@ eslint-plugin-jsx-a11y@6.1.2:
     has "^1.0.3"
     jsx-ast-utils "^2.0.1"
 
-eslint-plugin-prettier@^3.0.1:
+eslint-plugin-prettier@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.0.1.tgz#19d521e3981f69dd6d14f64aec8c6a6ac6eb0b0d"
   integrity sha512-/PMttrarPAY78PLvV3xfWibMOdMDl57hmlQ2XqFeA37wd+CJ7WSxV7txqjVPHi/AAFKd2lX0ZqfsOc/i5yFCSQ==
@@ -8635,7 +8635,7 @@ react-dev-utils@^7.0.1:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-react-dom@^16.8.0-alpha.0:
+react-dom@16.8.0-alpha.0:
   version "16.8.0-alpha.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.0-alpha.0.tgz#47bbcf42593eab5468b577d3c3f3c27f251a65ef"
   integrity sha512-OGfLUXGxtMgqLB1BqnB9flVCvc8VvAnhQYeFr+EUzwiODcD34dPrxtfa7ccK4dwzcPi8HRLSyBcaQi2OvVoUww==
@@ -8669,7 +8669,7 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-router-dom@^4.3.1:
+react-router-dom@4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
   integrity sha512-c/MlywfxDdCp7EnB7YfPMOfMD3tOtIjrQlj/CKfNMBxdmpJP8xcz5P/UAFn3JbnQCNUxsHyVVqllF9LhgVyFCA==
@@ -8769,7 +8769,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.8.0-alpha.0:
+react@16.8.0-alpha.0:
   version "16.8.0-alpha.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.0-alpha.0.tgz#8545eb79534cce5ba99ed40085f7f955e8857a19"
   integrity sha512-B/nJJkNqV4JAJQ1M0Q38ZvhZ6BoYsjyZq29hbsIIPYayn/0DcYhu7tExpfzdtTC0SnUcA+RnDBTlXTEJ5b9PEg==
