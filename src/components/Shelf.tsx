@@ -3,7 +3,12 @@ import {ShelfProps} from '../common/types'
 import BookGrid from './BookGrid'
 import BooksDispatch from '../contexts/BooksDispatch'
 
-const Shelf: React.FunctionComponent<ShelfProps> = ({books, title, type}) => {
+const Shelf: React.FunctionComponent<ShelfProps> = ({
+  books,
+  title,
+  type,
+  draggable = true,
+}) => {
   const dispatch = useContext(BooksDispatch)
 
   const handleDragOver = (e: React.DragEvent<HTMLElement>) => {
@@ -11,7 +16,6 @@ const Shelf: React.FunctionComponent<ShelfProps> = ({books, title, type}) => {
   }
 
   const handleDrop = (e: React.DragEvent<HTMLElement>) => {
-    console.log(e)
     const id = e.dataTransfer.getData('id')
     dispatch({type: 'BOOKS_UPDATE', book: {id: id, shelf: type}})
   }
@@ -20,7 +24,10 @@ const Shelf: React.FunctionComponent<ShelfProps> = ({books, title, type}) => {
     <div className="bookshelf" onDragOver={handleDragOver} onDrop={handleDrop}>
       <h2 className="bookshelf-title">{title}</h2>
       <div className="bookshelf-books">
-        <BookGrid books={books.filter(book => book.shelf === type)} />
+        <BookGrid
+          books={books.filter(book => book.shelf === type)}
+          draggable={draggable}
+        />
       </div>
     </div>
   )

@@ -2,10 +2,13 @@
 
 ## TODO
 
-- [ ] Edit book category via drag and drop
 - [ ] Show book details when clicking on its cover image
 
 ## [0.2.0]
+
+### ADDED
+
+- Edit book category via drag and drop
 
 ### CHANGED
 

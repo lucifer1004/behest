@@ -2,7 +2,10 @@ import React from 'react'
 import {BookItemProps} from '../common/types'
 import BookSelect from './BookSelect'
 
-const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
+const BookItem: React.FunctionComponent<BookItemProps> = ({
+  book,
+  draggable = true,
+}) => {
   const handleDragStart = (e: React.DragEvent<HTMLElement>) => {
     e.dataTransfer.setData('id', book.id)
   }
@@ -12,7 +15,7 @@ const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
       <div className="book-top">
         <div
           className="book-cover"
-          draggable
+          draggable={draggable}
           onDragStart={handleDragStart}
           style={{
             width: 128,
