@@ -22,7 +22,9 @@ const Shelf: React.FunctionComponent<ShelfProps> = ({
 
   return (
     <div className="bookshelf" onDragOver={handleDragOver} onDrop={handleDrop}>
-      <h2 className="bookshelf-title">{title}</h2>
+      <h2 className="bookshelf-title">
+        {title} ({books.filter(book => book.shelf === type).length})
+      </h2>
       <div className="bookshelf-books">
         <BookGrid
           books={books.filter(book => book.shelf === type)}

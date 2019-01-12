@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useReducer} from 'react'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route} from 'react-router-dom'
 import {Book} from './common/types'
 import {getAll} from './helpers/BooksAPI'
 import BooksDispatch from './contexts/BooksDispatch'
 import booksReducer from './reducers/BooksReducer'
 import Main from './pages/Main'
 import Search from './pages/Search'
+import BookInfo from './pages/BookInfo'
 import './App.css'
 
 const BooksApp: React.FunctionComponent<{}> = () => {
@@ -42,13 +43,13 @@ const BooksApp: React.FunctionComponent<{}> = () => {
     <BrowserRouter>
       <BooksDispatch.Provider value={dispatch}>
         <div className="app">
-          <Switch>
-            <Route path="/search" component={Search} />
-            <Route
-              path="/"
-              render={() => <Main isLoading={loadingStatus} books={books} />}
-            />
-          </Switch>
+          <Route path="/search" component={Search} />
+          <Route
+            exact
+            path="/"
+            render={() => <Main isLoading={loadingStatus} books={books} />}
+          />
+          <Route exact path="/book/:id" component={BookInfo} />
         </div>
       </BooksDispatch.Provider>
     </BrowserRouter>

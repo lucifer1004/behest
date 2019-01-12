@@ -9,6 +9,7 @@
 ### ADDED
 
 - Edit book category via drag and drop
+- Show progress while loading or searching
 
 ### CHANGED
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {BookItemProps} from '../common/types'
 import BookSelect from './BookSelect'
 
@@ -29,7 +30,9 @@ const BookItem: React.FunctionComponent<BookItemProps> = ({
         />
         <BookSelect book={book} />
       </div>
-      <div className="book-title">{book.title || null}</div>
+      <div className="book-title">
+        <Link to={`/book/${book.id}`}>{book.title || null}</Link>
+      </div>
       <div className="book-authors">
         {book.authors ? book.authors.join(', ') : null}
       </div>
