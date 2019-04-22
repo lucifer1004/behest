@@ -13,7 +13,7 @@ const BookItem: React.FunctionComponent<BookItemProps> = ({book}) => {
       <div className="book-top">
         <div
           className="book-cover"
-          draggable={location.pathname === '/'}
+          draggable={window.location.pathname === '/'}
           onDragStart={handleDragStart}
           style={{
             width: 128,

@@ -76,7 +76,7 @@ const BookCard = ({book}: {book: Book}) => {
   const handleShare = () => {
     let clonedNavigator: any = window.navigator
     if (clonedNavigator && clonedNavigator.clipboard) {
-      clonedNavigator.clipboard.writeText(location.href).then(() => {
+      clonedNavigator.clipboard.writeText(window.location.href).then(() => {
         setShareStatus(true)
       })
     } else {

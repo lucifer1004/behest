@@ -5,7 +5,7 @@ import {search} from '../helpers/BooksAPI'
 import {useDebounce} from '../helpers/CustomHooks'
 import BookGrid from '../components/BookGrid'
 
-const Search: React.FunctionComponent = ({}) => {
+const Search: React.FunctionComponent = () => {
   const [input, updateInput] = useState('')
   const [books, updateBooks] = useState([])
   const [found, setFound] = useState(false)
@@ -16,23 +16,20 @@ const Search: React.FunctionComponent = ({}) => {
 
   const debouncedInput = useDebounce(input, 500)
 
-  useEffect(
-    () => {
-      if (debouncedInput === '') return
-      setLoadingStatus(true)
-      search(debouncedInput).then(books => {
-        setLoadingStatus(false)
-        if (!books) return
-        if (books.hasOwnProperty('error')) {
-          setFound(false)
-          return
-        }
-        setFound(true)
-        updateBooks(books)
-      })
-    },
-    [debouncedInput],
-  )
+  useEffect(() => {
+    if (debouncedInput === '') return
+    setLoadingStatus(true)
+    search(debouncedInput).then(books => {
+      setLoadingStatus(false)
+      if (!books) return
+      if (books.hasOwnProperty('error')) {
+        setFound(false)
+        return
+      }
+      setFound(true)
+      updateBooks(books)
+    })
+  }, [debouncedInput])
 
   return (
     <div className="search-books">
