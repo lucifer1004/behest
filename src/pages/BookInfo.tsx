@@ -6,7 +6,7 @@ import BooksDispatch from '../contexts/BooksDispatch'
 import BookCard from '../components/BookCard'
 
 const BookInfo = ({match}: {match: any}) => {
-  const [book, setBook] = useState(null)
+  const [book, setBook] = useState<Book | undefined>(undefined)
   const [loading, setLoading] = useState(true)
   const dispatch = useContext(BooksDispatch)
   const getLocal = () => {
